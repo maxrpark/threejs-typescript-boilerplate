@@ -4,6 +4,8 @@ import { Debug } from "../experience/utils";
 import GUI from "lil-gui";
 interface IProps {
   environmentMapTexture?: any;
+  hasAmbientLight?: boolean;
+  hasDirectionalLight?: boolean;
 }
 interface EnvironmentInt {
   experience: Experience;
@@ -14,6 +16,8 @@ interface EnvironmentInt {
   environmentMap: any;
   debug: Debug;
   debugFolder: GUI;
+  hasAmbientLight?: boolean;
+  hasDirectionalLight?: boolean;
 
   setAmbientLight: () => void;
   setDirectionalLight: () => void;
@@ -29,6 +33,8 @@ export class Environment implements EnvironmentInt {
   environmentMap: any;
   debug: Debug;
   debugFolder: GUI;
+  hasAmbientLight?: boolean;
+  hasDirectionalLight?: boolean;
 
   constructor(props?: IProps) {
     Object.assign(this, props);
@@ -41,8 +47,8 @@ export class Environment implements EnvironmentInt {
       this.debugFolder = this.debug.ui.addFolder("environment");
     }
 
-    this.setDirectionalLight();
-    // this.setAmbientLight();
+    if (this.hasAmbientLight) this.setAmbientLight();
+    if (this.hasDirectionalLight) this.setDirectionalLight();
 
     if (this.environmentMapTexture) {
       this.setEnvironmentMap();

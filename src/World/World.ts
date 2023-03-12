@@ -24,6 +24,8 @@ export class World {
     this.resources.on("loaded", () => {
       this.environment = new Environment({
         environmentMapTexture: this.resources.items.environmentMapTexture,
+        hasAmbientLight: true,
+        hasDirectionalLight: true,
       });
 
       this.block = new StandardBlock({
