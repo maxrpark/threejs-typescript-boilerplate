@@ -42,11 +42,6 @@ export class Environment implements EnvironmentInt {
     this.scene = this.experience.scene;
     this.debug = this.experience.debug;
 
-    // Debug
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("environment");
-    }
-
     if (this.hasAmbientLight) this.setAmbientLight();
     if (this.hasDirectionalLight) this.setDirectionalLight();
 
@@ -58,6 +53,22 @@ export class Environment implements EnvironmentInt {
   setAmbientLight() {
     this.ambientLight = new THREE.AmbientLight("#ffffff", 0.6);
     this.scene.add(this.ambientLight);
+
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("ambient light");
+      this.debugFolder
+        .add(this.ambientLight, "intensity")
+        .name("intensity")
+        .min(0)
+        .max(4)
+        .step(0.001);
+      this.debugFolder
+        .addColor(this.ambientLight, "color")
+        .name("color")
+        .min(0)
+        .max(4)
+        .step(0.001);
+    }
   }
 
   setDirectionalLight() {
@@ -81,6 +92,40 @@ export class Environment implements EnvironmentInt {
     );
     this.scene.add(this.directionalLight);
     this.scene.add(directionalLightCameraHelper);
+
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("directional light");
+      this.debugFolder
+        .add(this.directionalLight, "intensity")
+        .name("intensity")
+        .min(0)
+        .max(4)
+        .step(0.001);
+      this.debugFolder
+        .add(this.directionalLight.position, "x")
+        .name("x")
+        .min(0)
+        .max(4)
+        .step(0.001);
+      this.debugFolder
+        .add(this.directionalLight.position, "y")
+        .name("y")
+        .min(0)
+        .max(4)
+        .step(0.001);
+      this.debugFolder
+        .add(this.directionalLight.position, "z")
+        .name("z")
+        .min(0)
+        .max(4)
+        .step(0.001);
+      this.debugFolder
+        .addColor(this.ambientLight, "color")
+        .name("color")
+        .min(0)
+        .max(4)
+        .step(0.001);
+    }
   }
 
   setEnvironmentMap() {
@@ -113,6 +158,7 @@ export class Environment implements EnvironmentInt {
     // Debug
 
     if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("environment");
       this.debugFolder
         .add(this.environmentMap, "intensity")
         .name("envMapIntensity")
