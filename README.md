@@ -1,4 +1,4 @@
-# Project Contents
+# THREE.js boilerplate
 
 ## src
 
