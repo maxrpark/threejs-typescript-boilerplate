@@ -120,7 +120,7 @@ export class Environment implements EnvironmentInt {
         .max(4)
         .step(0.001);
       this.debugFolder
-        .addColor(this.ambientLight, "color")
+        .addColor(this.directionalLight, "color")
         .name("color")
         .min(0)
         .max(4)
